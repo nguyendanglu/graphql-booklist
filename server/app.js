@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -26,11 +27,26 @@ const app = express();
     app.use(express.json());
     app.use(cors());
 
+    app.use((req, res, next) => {
+      const authHeader = req.headers.authorization;
+      if (authHeader) {
+        const token = authHeader.replace('Bearer ', '');
+        try {
+          const decoded = jwt.verify(token, 'supersecretkey');
+          req.user = decoded;
+        } catch (err) {
+          req.user = null;
+        }
+      }
+      next();
+    });
+
     // GraphQL endpoint - supports both GET and POST
     app.all(
       '/graphql',
       createHandler({
-        schema
+        schema,
+        context: (req) => ({ user: req.raw ? req.raw.user : req.user })
       })
     );
 
