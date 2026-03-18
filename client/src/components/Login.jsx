@@ -26,9 +26,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+
     const result = await executeMutation({ username, password });
-    
+
     if (result.error) {
       setError(result.error.message.replace('[GraphQL] ', ''));
       return;
@@ -43,25 +43,26 @@ function Login() {
   return (
     <div className="login-container">
       <h2>Login to GraphQL Bookstore</h2>
-      {error && <p className="error" style={{color: 'red'}}>{error}</p>}
+      {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Username:</label>
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            required 
-          />
+          <label>Username:
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            /></label>
         </div>
         <div className="form-group">
-          <label>Password:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
+          <label>Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
         </div>
         <button type="submit">Login</button>
       </form>
