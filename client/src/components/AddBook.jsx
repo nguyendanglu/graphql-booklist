@@ -45,19 +45,22 @@ function AddBook() {
     return (
         <form id="add-book" onSubmit={submitForm}>
             <div className="field">
-                <label>Book name:</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                <label>Book name:
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                </label>
             </div>
             <div className="field">
-                <label>Genre:</label>
-                <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+                <label>Genre:
+                    <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+                </label>
             </div>
             <div className="field">
-                <label>Author:</label>
-                <select value={authorId} onChange={(e) => setAuthorId(e.target.value)}>
-                    <option value="">Select author</option>
-                    {displayAuthors()}
-                </select>
+                <label>Author:
+                    <select value={authorId} onChange={(e) => setAuthorId(e.target.value)}>
+                        <option value="">Select author</option>
+                        {displayAuthors()}
+                    </select>
+                </label>
             </div>
             <button> + </button>
         </form>
