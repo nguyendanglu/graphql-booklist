@@ -41,3 +41,11 @@ test('login page has error message 3', async ({ page }) => {
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(page.getByText('Invalid password')).toBeVisible();
 });
+
+test('login page has success login', async ({ page }) => {
+    await page.goto('http://localhost:5173/login');
+    await page.getByLabel('Username:').fill('Shinichi');
+    await page.getByLabel('Password:').fill('MoriRan');
+    await page.getByRole('button', { name: 'Login' }).click();
+    await expect(page.getByText('No book selected...')).toBeVisible();
+});
